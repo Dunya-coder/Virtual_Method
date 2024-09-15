@@ -14,11 +14,16 @@ namespace ConsoleApp1
             Form f = new Form(2, 4);
             double s=f.Surface();
             Console.WriteLine(s);
+            //virtualfield
+            Credit c = new Credit(689);
+            decimal cc = c.Sum;
+            Console.WriteLine(cc);
+
         }
     }
-    class Form
+    class Form//shakl
     {
-        double width, height;
+        double width, height;//eni ,bo'yi
         public Form(double a, double b)
         {
             width = a; height = b;
@@ -40,20 +45,21 @@ namespace ConsoleApp1
                 if (value >= 0) height = value;
             }
         }
-            public virtual double Surface()
+            public virtual double Surface()//yuzasi
             {
             return Width*Height;
              }
 
     
     }
-    class Triangle:Form
+    class Triangle:Form//uchburchak
     { 
         public Triangle(double _a,double b) : base(_a, b) { }
         public override double Surface()
         {
-            return Width * Height / 2;
+            return base.Surface() / 2;
         }
+       
     }
     class Paralelogram : Form
     {
@@ -67,6 +73,31 @@ namespace ConsoleApp1
         public override double Surface()
         {
             return base.Surface()*Math.Sin(Alfa);
+        }
+    }
+    //Xususiyatlar qayta aniqlanishi
+    class Credit
+    {
+        protected decimal sum;
+        public Credit(decimal s)
+        {
+            sum = s;
+        }
+        public virtual decimal Sum
+        {
+            get { return sum; }
+            set { sum = value; }
+        }
+    }
+    class LongCredit : Credit
+    {
+        public LongCredit(decimal Is):
+            base(Is)
+        { }
+        public override decimal Sum
+        {
+            get { return sum; }
+            set { if (value > 1000) sum = value; }
         }
     }
 
